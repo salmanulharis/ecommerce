@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+
+<h1>Subtotal(<span id="subtotal">{{ count }}</span>)items</h1>
+    <ul>
+      <div class="d-flex flex-wrap">
+        {% for cart_item in cart_items %}
+        <div class="card m-3" style="width: 18rem; height: 25rem;">
+          <img class="card-img-top" src="{{ cart_item.product.image.url }}" style="display: block; margin-left:auto; margin-right:auto; margin-top: auto; width:80%; overflow: auto;" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{ cart_item.product.name }}</h5>
+            <h6 class="card-title">{{ cart_item.product.price }}</h6>
+            <p class="card-text">{{ cart_item.product.description }}</p>
+            <a href="{% url 'removecart' cart_item.id %}" class="btn btn-success">Remove <i class="far fa-trash-alt"></i></a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </ul>
+{% endblock %}

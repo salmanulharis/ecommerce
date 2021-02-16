@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <ul>
+      <div class="d-flex flex-wrap">
+        {% for product in products %}
+        <a href="{% url 'detailed_product' product.id %}" class="custom-card" style="text-decoration: none;">
+          <div class="card m-3" style="width: 18rem; height: 25rem;">
+            <img class="card-img-top" style="display: block; margin-left:auto; margin-right:auto; margin-top: auto; width:80%; overflow: auto;" src="{{ product.image.url }}" alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title" style="color:black">{{ product.name }}</h5>
+              <h4 class="card-title" style="color: black;">{{ product.price }}</h4>
+              <!-- <button data-id="{{ product.id }}" class="addcart btn btn-warning"> Add to Cart <i class="fas fa-cart-plus"></i></button> -->
+            </div>
+          </div>
+        </a>
+        {% endfor %}
+        <script>
+          $(document).ready(function(){
+              $(".addcart").click(function(){
+                  var id = $(this).data('id')
+                  $.get(`/product/addtocart/${id}/`, (res)=>{
+                      $('#cart').text(res.count)
+                      // // $(this).text(res.status)
+                      // if(res.existstatus == "already"){
+                      //     alert("item is already exist in cart")
+                      // }
+                      // else{
+                      //   alert("added to cart")
+                      // }
+                  })
+                  
+              });
+              });
+      </script>
+      </div>
+    </ul>
+{% endblock %}

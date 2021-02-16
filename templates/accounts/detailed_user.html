@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <div class="container">
+        <p class="display-4">Register</p>
+        <ul>
+            {% for u in users %}
+            <li><a href="/accounts/users/detail/{{u.id}}/">{{ u }}</a></li>
+            {% endfor %}
+        </ul>
+        <h1>{{ user_object.username }}</h1>
+        <h3> {{ user_object.email }} </h3>
+        <h3> {{ user_object.firstname }} </h3>
+        <h3> {{ user_object.phone }} </h3>
+    </div>
+{% endblock %}

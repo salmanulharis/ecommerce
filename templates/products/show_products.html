@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block head %}
+    <div class="container">
+        <p class="display-4">{{ products.0.category }}</p>
+        {% for product in products %}
+        <div class="card m-3" style="width: 18rem;">
+          <img class="card-img-top" src="{{ product.image.url }}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <h6 class="card-title">{{ product.price }}</h6>
+            <p class="card-text">{{ product.description }}</p>
+            <a href="{% url 'edit_product' product.id %}" class="btn btn-success">Edit</a>
+            <a href="{% url 'delete_product' product.id %}" class="btn btn-danger">delete</a>
+            <a href="{% url 'addtocart' product.id %}" class="btn btn-danger">Add to Cart</a>
+          </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

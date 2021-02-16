@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+    <div class="d-flex flex-wrap">
+        <div>
+            <img class="card-img-top" style="width: 500px;" src="{{ product.image.url }}" alt="Card image cap">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title" style="color:black">{{ product.name }}</h5>
+            <h6 class="card-title">{{ product.price }}</h6>
+            <p class="card-text">{{ product.description }}</p>
+            <a href="{% url 'edit_product' product.id %}" class="btn btn-success"><i class="fas fa-pen-square"></i></a>
+            <a href="{% url 'delete_product' product.id %}" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+            <button data-id="{{ product.id }}" class="addcart btn btn-warning"><i class="fas fa-cart-plus"></i></button>
+        </div>
+    </div>
+    <script>
+        $(document).ready(function(){
+            $(".addcart").click(function(){
+                var id = $(this).data('id')
+                $.get(`/product/addtocart/${id}/`, (res)=>{
+                    $('#cart').text(res.count)
+                })
+                
+            });
+            });
+    </script>
+{% endblock %}
